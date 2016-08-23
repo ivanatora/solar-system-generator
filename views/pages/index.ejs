@@ -1,15 +1,36 @@
 <html>
 <head>
 <title>Solar system generator</title>
-<link type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
     
-    <form method="post" action="">
+    <form method="post" action="" id="star">
         <table>
             <tr>
                 <td>Star name:</td>
                 <td><input type="text" name="name" required/></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Mass (in solar masses)</td>
+                <td><input type="number" name="mass" min="0.1" max="400" required /></td>
+                <td class="slider"><div id="mass-slider"></div></td>
+            </tr>
+            <tr>
+                <td>Radius (in solar radiuses)</td>
+                <td><input type="number" name="radius" required /></td>
+                <td class="slider"><div id="radius-slider"></div></td>
+            </tr>
+            <tr>
+                <td>Estimated temperature (°C)</td>
+                <td><input type="number" name="temperature" readonly /></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Estimated type</td>
+                <td colspan="2" class="estimated"></td>
             </tr>
         </table>
     </form>
