@@ -32,6 +32,9 @@ function calculateLumnosity(){
     if (iLumnosity > 10){
         iLumnosity = Math.ceil(iLumnosity);
     }
+    else {
+        iLumnosity = Math.round(iLumnosity * 100) / 100;
+    }
     
     $('input[name="lumnosity"]').val(iLumnosity);
     calculateEstimate();
@@ -58,6 +61,27 @@ function calculateEstimate(){
     // mass check
     if (iMass < 20){
         sEstimate = 'Main sequence';
+        if (iTemperature < 3700){
+            sEstimate = 'Class M (red)';
+        }
+        else if (iTemperature < 5200){
+            sEstimate = 'Class K (orange)';
+        }
+        else if (iTemperature < 6000){
+            sEstimate = 'Class G (yellow)';
+        }
+        else if (iTemperature < 7500){
+            sEstimate = 'Class F (yellow white)';
+        }
+        else if (iTemperature < 10000){
+            sEstimate = 'Class A (white)';
+        }
+        else if (iTemperature < 30000){
+            sEstimate = 'Class B (blue white)';
+        }
+        else {
+            sEstimate = 'Class O (blue)';
+        }
     }
     
     // radius check
@@ -72,9 +96,11 @@ function calculateEstimate(){
 
 $('#mass-slider').slider({
     min: 0.1,
-    max: 400,
+    max: 2,
+    step: 0.1,
+    value: 1,
     slide: function(event, ui){
-        $('input[name="mass"]').val(Math.ceil(ui.value));
+        $('input[name="mass"]').val(ui.value);
         calculateTemperature();
         calculateLumnosity();
         calculateDensity();
@@ -91,10 +117,12 @@ $('input[name="mass"]').change(function(e){
 $('input[name="mass"]').val(1);
 
 $('#radius-slider').slider({
-    min: 0.1,
-    max: 2000,
+    min: 0.5,
+    max: 1.5,
+    step: 0.1,
+    value: 1,
     slide: function(event, ui){
-        $('input[name="radius"]').val(Math.ceil(ui.value));
+        $('input[name="radius"]').val(ui.value);
         calculateEstimate();
         calculateDensity();
     }
@@ -105,3 +133,9 @@ $('input[name="radius"]').change(function(e){
     calculateDensity();
 })
 $('input[name="radius"]').val(1);
+
+
+calculateTemperature();
+calculateLumnosity();
+calculateDensity();
+calculateEstimate();
