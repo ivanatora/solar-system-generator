@@ -6,11 +6,11 @@
 </head>
 <body>
     
-    <form method="post" action="" id="star">
+    <form method="post" action="/submit_star" id="star">
         <table>
             <tr>
                 <td>Star name:</td>
-                <td colspan="3"><input type="text" name="name" required/></td>
+                <td colspan="3"><input type="text" name="name" required style="width: 100%"/></td>
             </tr>
             <tr>
                 <td>Mass (in solar masses)</td>
@@ -47,6 +47,7 @@
                 <td colspan="3" class="estimated"></td>
             </tr>
         </table>
+        <input type="submit" />
     </form>
 
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>

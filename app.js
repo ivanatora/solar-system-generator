@@ -1,5 +1,21 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
+
+var db;
+var MongoClient = require('mongodb').MongoClient
+MongoClient.connect('mongodb://test:test@ds013926.mlab.com:13926/solar-systems', function(err, database){
+  // ... start the server
+  console.log('Db connected!')
+  db = database;
+})
+
+app.use(bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
+//app.use(express.json());       // to support JSON-encoded bodies
+//app.use(express.urlencoded()); // to support URL-encoded bodies
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -8,6 +24,15 @@ app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
     response.render('pages/index');
+});
+
+app.post('/submit_star', function(request, response) {
+    console.log('request.body')
+    console.log(request.body)
+    if (db){
+        db.collection('stars').save(request.body);
+    }
+    response.redirect('/');
 });
 
 app.use(express.static('public'));
