@@ -1,0 +1,24 @@
+{
+  "name": "solar-system-generator",
+  "version": "1.0.0",
+  "description": "Generate solar systems",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivanatora/solar-system-generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivanatora/solar-system-generator/issues"
+  },
+  "homepage": "https://github.com/ivanatora/solar-system-generator#readme",
+  "dependencies": {
+    "ejs": "^2.5.1",
+    "express": "^4.14.0"
+  }
+}
