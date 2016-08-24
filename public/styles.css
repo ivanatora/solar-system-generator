@@ -1,5 +1,23 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+body {
+    background-color: black;
+    color: white;
+    font-family: Roboto;
+    font-size: 8px;
+}
+
+#star {
+    width: 600px;
+    margin: auto;
+    border: 3px solid teal;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
 #star input {
-    width: 100px;
+    width: 60px;
 }
 
 .slider {

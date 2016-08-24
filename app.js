@@ -27,8 +27,6 @@ app.get('/', function(request, response) {
 });
 
 app.post('/submit_star', function(request, response) {
-    console.log('request.body')
-    console.log(request.body)
     if (db){
         db.collection('stars').save(request.body);
     }

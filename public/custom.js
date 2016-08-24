@@ -41,7 +41,7 @@ function calculateLumnosity(){
 }
 
 function calculateDensity(){
-    var iMass = parseInt($('input[name="mass"]').val());
+    var iMass = $('input[name="mass"]').val();
     var iRadius = $('input[name="radius"]').val();
     var iSunVolumes = Math.pow(iRadius, 3);
     var iDensity = iMass / iSunVolumes;
