@@ -1,6 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+var aPageData = {
+    nav: ''
+};
 
 var db;
 var MongoClient = require('mongodb').MongoClient
@@ -22,15 +25,29 @@ app.set('port', (process.env.PORT || 5000));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.get('/', function(request, response) {
-    response.render('pages/index');
+app.get('/', function(req, res) {
+    aPageData.nav = 'index';
+    res.render('pages/index');
 });
 
-app.post('/submit_star', function(request, response) {
+app.get('/catalog', function(req, res){
+    aPageData.nav = 'catalog';
+    
+    db.collection('stars').find().toArray(function(err, res2){
+        if (err) return console.log(err);
+        
+        aPageData.data = res2;
+        res.render('pages/catalog', aPageData)
+    })
+});
+
+app.post('/submit_star', function(req, res) {
+    aPageData.nav = 'index';
     if (db){
-        db.collection('stars').save(request.body);
+        db.collection('stars').save(req.body);
     }
-    response.render('pages/index', {star_added: true});
+    aPageData.star_added = true;
+    res.render('pages/index', aPageData);
 });
 
 app.use(express.static('public'));

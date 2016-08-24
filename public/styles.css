@@ -7,7 +7,9 @@ input {
     color: black;
 }
 
-#star, .main-navigation {
+#star, .main-navigation, .catalog {
+    width: 600px;
+    margin: 20px auto;
     border: 3px solid teal;
     border-radius: 10px;
     padding: 10px;
@@ -21,9 +23,4 @@ input {
 .slider {
     width: 200px;
     padding-left: 20px;
-}
-
-#star, .main-navigation {
-    width: 600px;
-    margin: 20px auto;
 }
