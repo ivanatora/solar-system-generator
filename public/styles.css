@@ -24,3 +24,9 @@ input {
     width: 200px;
     padding-left: 20px;
 }
+
+.pagination {
+    display: block;
+    width: 600px;
+    margin: 20px auto;
+}

@@ -12,14 +12,26 @@
         <tbody>
             <% for (i = 0; i < data.length; i++){ %>
             <tr>
-                <td><%= i+1 %></td>
+                <td><%= data[i].id %></td>
                 <td><%= data[i].name %></td>
                 <td><%= data[i].class %></td>
-                <td>Column content</td>
+                <td><a href="/planets?id=<%= data[i]._id %>" class="btn btn-primary"><%= typeof data[i].planets == 'undefined' ? 0 : data[i].planets.length %> planets</a></td>
             </tr>
             <% } %>
-            
         </tbody>
     </table>
+    <ul class='pagination'>
+        <% if (current_page > 1){ %>
+        <li><a href='/catalog?page=<%= current_page - 1 %>'>&lt;</a></li>
+        <% } %>
+        <% for (i = 1; i <= num_pages; i++) { %>
+        <li class="<%= (current_page == i) ? 'active': '' %>">
+            <a href='/catalog?page=<%= i %>'><%=i%></a>
+        </li>
+        <% } %>
+        <% if (current_page < num_pages) { %>
+        <li><a href='/catalog?page=<%= current_page + 1 %>'>&gt;</a></li>
+        <% } %>
+    </ul>
 
 <% include footer %>
