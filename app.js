@@ -30,7 +30,7 @@ app.post('/submit_star', function(request, response) {
     if (db){
         db.collection('stars').save(request.body);
     }
-    response.redirect('/');
+    response.render('pages/index', {star_added: true});
 });
 
 app.use(express.static('public'));

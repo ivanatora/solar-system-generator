@@ -2,10 +2,27 @@
 <head>
 <title>Solar system generator</title>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.min.css">
+
+<!-- Optional theme -->
+
 <link rel="stylesheet" href="/styles.css" />
+<link rel="stylesheet" href="/stars.css" />
 </head>
 <body>
-    
+    <div id='stars'></div>
+    <div id='stars2'></div>
+    <div id='stars3'></div>
+    <ul class="nav nav-pills main-navigation">
+        <li class="active">
+            <a class="" href="#">Create</a>
+        </li>
+        <li class="">
+            <a class="" href="#">Catalog</a>
+        </li>
+    </ul>
+
     <form method="post" action="/submit_star" id="star">
         <table>
             <tr>
@@ -31,7 +48,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td>Estimated temperature <br /><small>(°C)</small></td>
+                <td>Estimated temperature <br /><small>(K)</small></td>
                 <td><input type="number" name="temperature" readonly /></td>
                 <td></td>
                 <td></td>
@@ -47,11 +64,17 @@
                 <td colspan="3" class="estimated"></td>
             </tr>
         </table>
-        <input type="submit" />
+        <button type="submit" class="btn btn-success">Create</button>
+        
+        <% if (typeof star_added != 'undefined'){%>
+        <h1>Star was added!</h1>
+        <% } %>
     </form>
 
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/custom.js"></script>
 </body>
 </html>
