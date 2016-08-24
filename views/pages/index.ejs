@@ -38,13 +38,14 @@
             </tr>
             <tr>
                 <td>Estimated type</td>
-                <td colspan="3" class="estimated"></td>
+                <td colspan='2'><input type="text" name="class" readonly style='width: 200px;'/></td>
+                <td></td>
             </tr>
         </table>
         <button type="submit" class="btn btn-success">Create</button>
         
         <% if (typeof star_added != 'undefined'){%>
-        <h1>Star was added!</h1>
+        <h1><%= star_added %></h1>
         <% } %>
     </form>
 

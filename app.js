@@ -1,3 +1,4 @@
+var dt = require('node-datetime');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
@@ -27,15 +28,17 @@ app.set('view engine', 'ejs');
 
 app.get('/', function(req, res) {
     aPageData.nav = 'index';
-    res.render('pages/index');
+    console.log("page data? ", aPageData)
+    res.render('pages/index', aPageData);
 });
 
 app.get('/catalog', function(req, res){
     aPageData.nav = 'catalog';
     
-    db.collection('stars').find().toArray(function(err, res2){
+    db.collection('stars').find().limit(10).sort({created: -1}).toArray(function(err, res2){
         if (err) return console.log(err);
         
+        console.log(res2)
         aPageData.data = res2;
         res.render('pages/catalog', aPageData)
     })
@@ -44,10 +47,29 @@ app.get('/catalog', function(req, res){
 app.post('/submit_star', function(req, res) {
     aPageData.nav = 'index';
     if (db){
-        db.collection('stars').save(req.body);
+        var data = req.body;
+        db.collection('stars').count({name: data.name})
+        .then (function(bExists){
+            if (bExists){
+                aPageData.star_added = 'This name is already in the Catalog, try another';
+            }
+            else {
+                aPageData.star_added = 'Adding a star...';
+            }
+            return getNextSequence('stars')
+        })
+        .then(function(found){
+            data.created = dt.create().format('Y-m-d H:M:S');
+            data.id = found.value.seq;
+
+            db.collection('stars').save(data);
+            res.render('pages/index', aPageData);
+            delete aPageData.star_added;
+        })
+        .catch(function(err){
+            console.log('Got some error here: ', err)
+        })
     }
-    aPageData.star_added = true;
-    res.render('pages/index', aPageData);
 });
 
 app.use(express.static('public'));
@@ -55,3 +77,12 @@ app.use(express.static('public'));
 app.listen(app.get('port'), function() {
     console.log('Node app is running on port ', app.get('port'));
 });
+
+
+function getNextSequence(name) {
+    var ret = db.collection('counters').findAndModify({_id: name}, {}, {$inc: {seq: 1}}, {
+        new: true,
+        upsert: true
+    });
+    return ret;
+}

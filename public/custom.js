@@ -89,7 +89,7 @@ function calculateEstimate(){
         sEstimate = 'Giant';
     }
     
-    $('.estimated').html(sEstimate);
+    $('input[name="class"]').val(sEstimate);
 }
 
 // sliders
