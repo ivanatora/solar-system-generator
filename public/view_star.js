@@ -25,6 +25,22 @@ function calculateOrbitalPeriod(){
     $('input[name="orbital_period"]').val(iPeriodDays);
 }
 
+function calculateSurfaceGravity() {
+    var iMass = $('input[name="mass"]').val();
+    var iRadius = $('input[name="radius"]').val();
+    
+    var iPlanetMassKg = iMass * 5.972 * Math.pow(10, 24);
+    var iPlanetRadiusMeters = iRadius * 6371 * Math.pow(10, 3);
+    
+    var gravConst = 6.674 * Math.pow(10, -11);
+    
+    var g = gravConst * iPlanetMassKg / Math.pow(iPlanetRadiusMeters, 2);
+    
+    g = Math.round(g * 100) / 100;
+    
+    $('input[name="surface_gravity"]').val(g);
+}
+
 
 $('#mass-slider').slider({
     min: 0.01,
@@ -34,11 +50,13 @@ $('#mass-slider').slider({
     slide: function(event, ui){
         $('input[name="mass"]').val(ui.value);
         calculateDensity();
+        calculateSurfaceGravity();
     }
 });
 $('input[name="mass"]').change(function(e){
     $('#mass-slider').slider('value', $(this).val());
     calculateDensity();
+    calculateSurfaceGravity();
 })
 $('input[name="mass"]').val(1);
 
@@ -50,11 +68,13 @@ $('#radius-slider').slider({
     slide: function(event, ui){
         $('input[name="radius"]').val(ui.value);
         calculateDensity();
+        calculateSurfaceGravity();
     }
 })
 $('input[name="radius"]').change(function(e){
     $('#radius-slider').slider('value', $(this).val());
     calculateDensity();
+    calculateSurfaceGravity();
 })
 $('input[name="radius"]').val(1);
 
@@ -76,3 +96,4 @@ $('input[name="orbital_radius"]').val(1);
 
 calculateDensity();
 calculateOrbitalPeriod();
+calculateSurfaceGravity();
