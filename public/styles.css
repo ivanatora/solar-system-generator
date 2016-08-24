@@ -7,12 +7,18 @@ input {
     color: black;
 }
 
-#add-planet, #star-details, #star, .main-navigation, .catalog {
+#planet-list, #add-planet, #star-details, #star, .main-navigation, .catalog {
     width: 600px;
     margin: 20px auto;
     border: 3px solid teal;
     border-radius: 10px;
     padding: 10px;
+    margin-top: 20px;
+}
+
+h1, h2, h3, h4, h5 {
+    width: 600px;
+    margin: 20px auto;
     margin-top: 20px;
 }
 
@@ -29,4 +35,9 @@ input {
     display: block;
     width: 600px;
     margin: 20px auto;
+}
+
+#star-details, #add-planet, #planet-list {
+    float: left;
+    margin-right: 20px;
 }
