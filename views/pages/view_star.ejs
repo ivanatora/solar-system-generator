@@ -1,0 +1,77 @@
+<% include header %>
+
+<div class="panel panel-default" id="star-details">
+    <div class="panel-heading">Star: <%= data.name %></div>
+    <div class="panel-body">
+        <table>
+            <tr>
+                <td>Mass</td>
+                <td><%= data.mass %> M☉</td>
+            </tr>
+            <tr>
+                <td>Radius</td>
+                <td><%= data.radius %> R☉</td>
+            </tr>
+            <tr>
+                <td>Density</td>
+                <td><%= data.density %> ρ☉</td>
+            </tr>
+            <tr>
+                <td>Temperature</td>
+                <td><%= data.temperature %> K</td>
+            </tr>
+            <tr>
+                <td>Lumnosity</td>
+                <td><%= data.lumnosity %> L☉</td>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td><%= data.class %></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<form class="form-horizontal" method="post" action="/submit_planet" id="add-planet">
+    <input type='hidden' name='star_id' value='<%= data._id %>' />
+    <fieldset>
+        <legend>Add planet</legend>
+         <div class="form-group">
+            <label for="fld-name" class="col-lg-2 control-label">Name</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="fld-name" name='name' required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fld-mass" class="col-lg-2 control-label">Mass M⊕</label>
+            <div class="col-lg-3">
+                <input type="text" class="form-control" id="fld-mass" name='mass'>
+            </div>
+            <div id="mass-slider" class="col-lg-5"></div>
+        </div>
+        
+        <div class="form-group">
+            <label for="fld-radius" class="col-lg-2 control-label">Radius R⊕</label>
+            <div class="col-lg-3">
+                <input type="text" class="form-control" id="fld-radius" name='radius'>
+            </div>
+            <div id="radius-slider" class="col-lg-5"></div>
+        </div>
+        
+        <div class="form-group">
+            <label for="fld-density" class="col-lg-2 control-label">Density D⊕</label>
+            <div class="col-lg-3">
+                <input type="text" class="form-control" id="fld-density" name='density' readonly>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-success">Create</button>
+        
+        <% if (typeof planet_added != 'undefined'){%>
+        <h1><%= planet_added %></h1>
+        <% } %>
+    </fieldset>
+</form>
+
+
+<% include footer %>

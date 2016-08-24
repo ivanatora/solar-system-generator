@@ -7,7 +7,7 @@ input {
     color: black;
 }
 
-#star, .main-navigation, .catalog {
+#add-planet, #star-details, #star, .main-navigation, .catalog {
     width: 600px;
     margin: 20px auto;
     border: 3px solid teal;

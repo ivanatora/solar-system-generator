@@ -2,7 +2,12 @@
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="/custom.js"></script>
+    <% if (nav == 'index') { %>
+    <script src="/add_star.js"></script>
+    <% } %>
+    <% if (nav == 'view_star') { %>
+    <script src="/view_star.js"></script>
+    <% } %>
 </body>
 </html>
 

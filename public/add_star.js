@@ -1,4 +1,4 @@
-
+/* index */
 function calculateTemperature(){
     var iMass = $('input[name="mass"]').val();
     var iTemp = 5740 * Math.pow(iMass, 0.54);
@@ -139,3 +139,5 @@ calculateTemperature();
 calculateLumnosity();
 calculateDensity();
 calculateEstimate();
+
+
