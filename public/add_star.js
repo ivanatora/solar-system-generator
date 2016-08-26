@@ -50,6 +50,22 @@ function calculateDensity(){
     $('input[name="density"]').val(iDensity);
 }
 
+function calculateEscapeVelocity(){
+    var iMass = $('input[name="mass"]').val();
+    var iRadius = $('input[name="radius"]').val();
+    
+    var gravConst = 6.674 * Math.pow(10, -11);
+    var iMassKg = iMass * 1.989 * Math.pow(10, 30); // kgs
+    var iRadiusMeters = iRadius * 695700 * 1000;
+    
+    var iEscapeVelocity = Math.sqrt( (2 * gravConst * iMassKg) / iRadiusMeters );
+    
+    iEscapeVelocity /= 1000; // to km/s 
+    iEscapeVelocity = Math.round(iEscapeVelocity / 100) * 100;
+    
+    $('input[name="escape_velocity"]').val(iEscapeVelocity);
+}
+
 function calculateEstimate(){
     var iMass = $('input[name="mass"]').val();
     var iTemperature = $('input[name="temperature"]').val();
@@ -105,6 +121,7 @@ $('#mass-slider').slider({
         calculateLumnosity();
         calculateDensity();
         calculateEstimate();
+        calculateEscapeVelocity();
     }
 });
 $('input[name="mass"]').change(function(e){
@@ -113,6 +130,7 @@ $('input[name="mass"]').change(function(e){
     calculateLumnosity();
     calculateDensity();
     calculateEstimate();
+    calculateEscapeVelocity();
 })
 $('input[name="mass"]').val(1);
 
@@ -125,12 +143,14 @@ $('#radius-slider').slider({
         $('input[name="radius"]').val(ui.value);
         calculateEstimate();
         calculateDensity();
+        calculateEscapeVelocity();
     }
 })
 $('input[name="radius"]').change(function(e){
     $('#radius-slider').slider('value', $(this).val());
     calculateEstimate();
     calculateDensity();
+    calculateEscapeVelocity();
 })
 $('input[name="radius"]').val(1);
 
@@ -139,5 +159,5 @@ calculateTemperature();
 calculateLumnosity();
 calculateDensity();
 calculateEstimate();
-
+calculateEscapeVelocity();
 

@@ -41,6 +41,22 @@ function calculateSurfaceGravity() {
     $('input[name="surface_gravity"]').val(g);
 }
 
+function calculateEscapeVelocity(){
+    var iMass = $('input[name="mass"]').val();
+    var iRadius = $('input[name="radius"]').val();
+    
+    var gravConst = 6.674 * Math.pow(10, -11);
+    var iMassKg = iMass * 5.972 * Math.pow(10, 24);
+    var iRadiusMeters = iRadius * 6371 * Math.pow(10, 3);
+    
+    var iEscapeVelocity = Math.sqrt( (2 * gravConst * iMassKg) / iRadiusMeters );
+    
+    iEscapeVelocity /= 1000; // to km/s 
+    iEscapeVelocity = Math.round(iEscapeVelocity * 100) / 100;
+    
+    $('input[name="escape_velocity"]').val(iEscapeVelocity);
+}
+
 
 $('#mass-slider').slider({
     min: 0.01,
@@ -51,12 +67,14 @@ $('#mass-slider').slider({
         $('input[name="mass"]').val(ui.value);
         calculateDensity();
         calculateSurfaceGravity();
+        calculateEscapeVelocity();
     }
 });
 $('input[name="mass"]').change(function(e){
     $('#mass-slider').slider('value', $(this).val());
     calculateDensity();
     calculateSurfaceGravity();
+    calculateEscapeVelocity();
 })
 $('input[name="mass"]').val(1);
 
@@ -69,12 +87,14 @@ $('#radius-slider').slider({
         $('input[name="radius"]').val(ui.value);
         calculateDensity();
         calculateSurfaceGravity();
+        calculateEscapeVelocity();
     }
 })
 $('input[name="radius"]').change(function(e){
     $('#radius-slider').slider('value', $(this).val());
     calculateDensity();
     calculateSurfaceGravity();
+    calculateEscapeVelocity();
 })
 $('input[name="radius"]').val(1);
 
@@ -97,3 +117,4 @@ $('input[name="orbital_radius"]').val(1);
 calculateDensity();
 calculateOrbitalPeriod();
 calculateSurfaceGravity();
+calculateEscapeVelocity();
