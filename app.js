@@ -138,6 +138,18 @@ app.get('/view_star', function (req, res) {
     })
 })
 
+app.get('/delete_star', function (req, res){
+    if (typeof req.query.id == 'undefined'){
+        res.redirect('/catalog');
+    }
+    
+    db.collection('stars').deleteOne({_id: new ObjectId(req.query.id)})
+    .then(function(res2){
+        res.redirect('/catalog');
+    })
+    
+})
+
 app.use(express.static('public'));
 
 app.listen(app.get('port'), function () {
