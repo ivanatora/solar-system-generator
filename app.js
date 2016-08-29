@@ -128,7 +128,6 @@ app.get('/view_star', function (req, res) {
     
     db.collection('stars').findOne({_id: new ObjectId(req.query.id)})
     .then(function(res2){
-        console.log('found ', res2)
         aPageData.data = res2;
         res.render('pages/view_star', aPageData);
         delete aPageData.data;
@@ -147,6 +146,32 @@ app.get('/delete_star', function (req, res){
     .then(function(res2){
         res.redirect('/catalog');
     })
+})
+
+app.get('/delete_planet', function (req, res){
+    if (typeof req.query.star_id == 'undefined'){
+        res.redirect('/catalog');
+    }
+    if (typeof req.query.planet_id == 'undefined'){
+        res.redirect('/catalog');
+    }
+    
+    db.collection('stars').findOne({_id: new ObjectId(req.query.star_id)})
+    .then(function(res2){
+        var aNewPlanets = [];
+        for (var i in res2.planets){
+            if (res2.planets[i].id != req.query.planet_id){
+                aNewPlanets.push(res2.planets[i])
+            }
+        }
+        res2.planets = aNewPlanets;
+        
+        return db.collection('stars').updateOne({_id: new ObjectId(req.query.star_id)}, res2)
+    })
+    .then(function(res3){
+        res.redirect('/view_star?id='+req.query.star_id);
+    })
+    
     
 })
 
