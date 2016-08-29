@@ -17,6 +17,11 @@
     
     
     <ul class="nav nav-pills main-navigation">
+        <% if (typeof custom_nav != 'undefined'){ %>
+        <li class='active'>
+            <a href='#'><%= custom_nav %></a>
+        </li>
+        <% } %>
         <li class="<%= nav == 'index' ? 'active' : ''%>">
             <a class="" href="/">Create</a>
         </li>

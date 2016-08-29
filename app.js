@@ -129,8 +129,10 @@ app.get('/view_star', function (req, res) {
     db.collection('stars').findOne({_id: new ObjectId(req.query.id)})
     .then(function(res2){
         aPageData.data = res2;
+        aPageData.custom_nav = res2.name;
         res.render('pages/view_star', aPageData);
         delete aPageData.data;
+        delete aPageData.custom_nav;
     })
     .catch(function (err) {
         console.log('Got some error here: ', err)
