@@ -23,6 +23,7 @@
     "ejs": "^2.5.1",
     "express": "^4.14.0",
     "mongodb": "^2.2.8",
-    "node-datetime": "^1.0.0"
+    "node-datetime": "^1.0.0",
+    "node-gd": "^1.4.0"
   }
 }
