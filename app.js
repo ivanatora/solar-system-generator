@@ -191,8 +191,48 @@ app.get('/delete_planet', function (req, res){
     .then(function(){
         res.redirect('/view_star?id='+req.query.star_id);
     })
+})
+
+app.get('/perlin', function (req, res){
+    var iWidth = 300;
+    var iHeight = 300;
     
+    var gd = require('node-gd');
+    var perlin = require('perlin-noise');
+    var fs = require('fs');
+    var aPerlin = perlin.generatePerlinNoise(iWidth, iHeight, {
+        octaveCount: 5, // defaults to 4
+        amplitude: 0.1, // defaults to 0.1
+        persistance: 0.2, // defaults to 0.2
+    });
     
+    var img = gd.createTrueColorSync(iWidth, iHeight);
+    
+    var aHistogram = [];
+    
+    for (var i = 0; i < iWidth; i++){
+        for (var j = 0; j < iHeight; j++){
+            var iNoiseToColor = Math.round(aPerlin[i + j * iHeight] * 255);
+            
+            if (typeof aHistogram[iNoiseToColor] == 'undefined') aHistogram[iNoiseToColor] = 0;
+            aHistogram[iNoiseToColor]++;
+            
+            var oColor = img.colorAllocate(iNoiseToColor, iNoiseToColor, iNoiseToColor)
+            img.setPixel(i, j, oColor);
+        }
+    }
+    
+    console.log('histogram', aHistogram)
+    
+    var time = Math.floor(new Date() / 1000);
+    var sFilename = require('crypto').createHash('md5').update(time.toString()).digest("hex") + '.png';
+    img.saveFile('files/'+sFilename);
+    img.destroy();
+    
+//    console.log('perlin ', x)
+    res.sendFile(__dirname + '/files/'+sFilename, function(){
+        fs.unlinkSync('files/'+sFilename);
+    });
 })
 
 app.listen(app.get('port'), function () {
