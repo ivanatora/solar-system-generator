@@ -28,6 +28,12 @@
                 <td>Type</td>
                 <td><%= data.class %></td>
             </tr>
+            <% if (typeof (data.habitable_zone_start) != 'undefined'){ %>
+            <tr>
+                <td>Hab. zone</td>
+                <td><%= data.habitable_zone_start %> - <%= data.habitable_zone_end %> AU</td>
+            </tr>
+            <% } %>
         </table>
     </div>
 </div>

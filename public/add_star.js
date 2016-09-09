@@ -37,6 +37,12 @@ function calculateLumnosity(){
     }
     
     $('input[name="lumnosity"]').val(iLumnosity);
+    
+    var iHabitableZoneStart = iLumnosity * 0.5;
+    var iHabitableZoneEnd = iLumnosity * 3;
+    $('input[name="habitable_zone_start"]').val(iHabitableZoneStart);
+    $('input[name="habitable_zone_end"]').val(iHabitableZoneEnd);
+    
     calculateEstimate();
 }
 

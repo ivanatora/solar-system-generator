@@ -41,13 +41,20 @@
                 <td colspan='2'><input type="text" name="class" readonly style='width: 200px;'/></td>
                 <td></td>
             </tr>
-             <tr>
+            <tr>
                 <td>Surface escape velocity <br /><small>(km/s^2)</small></td>
                 <td><input type="number" name="escape_velocity" readonly /></td>
                 <td></td>
                 <td></td>
             </tr>
+            <tr>
+                <td>Habitable zone <br /><small>(AU)</small></td>
+                <td><input type="number" name="habitable_zone_start" readonly /></td>
+                <td>- </td>
+                <td><input type="number" name="habitable_zone_end" readonly /></td>
+            </tr>
         </table>
+        
         <button type="submit" class="btn btn-success">Create</button>
         
         <% if (typeof star_added != 'undefined'){%>
